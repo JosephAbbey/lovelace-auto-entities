@@ -242,6 +242,9 @@ class AutoEntities extends LitElement {
                 JSON.stringify({ ...entity, ...filter.options }).replace(
                   /this.entity_id/g,
                   entity.entity
+                ).replace(
+                  /this.attributes.([^ ]+)/g,
+                  (_, attr) => this.hass.states[entity.entity].attributes[attr]
                 )
               )
             );
